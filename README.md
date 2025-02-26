@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Expense Calculator
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project is a **Next.js 15** application using **Supabase** for authentication and database management. The app includes AI-powered functionalities, such as text generation or automated processing, leveraging OpenAI's API.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- **User Authentication:** Login, Register, and Logout with Supabase Auth.
+- **AI-Powered Functionalities:** Utilizes OpenAI API for intelligent features.
+- **Group Management:** Users can create and manage groups.
+- **Expense Tracking:** Track and display expenses per group.
+- **Protected Routes:** Middleware ensures authentication for secure pages.
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- **Next.js 15** (App Router)
+- **Tailwind CSS** (for styling)
+- **ShadCN** (UI components)
+- **React Hooks** (state & effect management)
+
+### Backend
+
+- **Supabase** (Authentication & Database)
+- **Middleware** (Session handling)
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- **Node.js** (Latest LTS recommended)
+- **Yarn** or **npm**
+- **Supabase Account** (Sign up at [https://supabase.com](https://supabase.com))
+
+### 1. Clone the Repository
+
+### 2. Install Dependencies
+
+```sh
+yarn install  # or npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Setup Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file in the root directory and add the following:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run the Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+yarn dev  # or npm run dev
+```
 
-## Deploy on Vercel
+The app will be available at [http://localhost:3000](http://localhost:3000)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Authentication & AI Usage
+
+### Supabase Authentication
+
+- Uses **Supabase Auth** for user sign-in/sign-up.
+- Middleware ensures only authenticated users access protected routes.
+- Session stored in cookies for persistence.
+- Logout clears the session and logs out the Supabase user.
+
+### AI Integration (OpenAI API)
+
+- Used for text processing and intelligent responses.
+
+---
