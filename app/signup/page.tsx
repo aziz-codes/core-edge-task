@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/lib/supabase"; // Ensure you have Supabase set up
+import Link from "next/link";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -60,6 +61,13 @@ export default function SignupPage() {
           {message && (
             <p className="text-sm text-center text-red-500">{message}</p>
           )}
+
+          <div className="flex items-center text-xs gap-1 justify-center">
+            Already have an account?
+            <Link href="/login" className="text-sky-500">
+              Sign in
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>
