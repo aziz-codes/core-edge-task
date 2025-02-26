@@ -85,7 +85,10 @@ export default function Dashboard() {
 
   return (
     <div className="p-4 max-w-4xl mx-auto flex flex-col gap-6">
-      <h1 className="text-2xl font-bold text-center">Your Groups</h1>
+      <h1 className="text-2xl font-bold text-center">
+        {" "}
+        {user && user.email.slice(0, user?.email?.indexOf("@"))} Groups
+      </h1>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button className="bg-green-600 hover:bg-green-700 text-white">
@@ -126,7 +129,7 @@ export default function Dashboard() {
             >
               <CardContent className="p-4 flex justify-between items-center">
                 <Link
-                  href={`/dashboard/groups/${group.id}`}
+                  href={`/dashboard/group/${group.id}`}
                   className="text-lg font-semibold hover:text-sky-500"
                 >
                   {group.name}

@@ -1,16 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { supabase } from "@/lib/supabase";
 
-export async function login(email: string, password: string) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-
-  if (error) return { error: error.message };
-
+export async function login(data: any) {
   // ✅ No need to await cookies(), it should be called directly
   (await cookies()).set("session", data.session?.access_token || "", {
     httpOnly: true,
@@ -18,6 +10,8 @@ export async function login(email: string, password: string) {
     secure: true,
     sameSite: "lax",
   });
-
-  return { success: true };
 }
+
+export const logout = async () => {
+  (await cookies()).delete("session");
+};

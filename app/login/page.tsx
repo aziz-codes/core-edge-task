@@ -5,19 +5,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { login } from "@/actions/auth";
+import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async () => {
-    const result = await login(email, password);
-    if (result.error) {
-      setError(result.error);
+    setLoading(true);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    await login(data);
+    if (error) {
+      setError(error.message);
+      setLoading(false);
     } else {
       router.push("/dashboard");
+      setLoading(false);
     }
   };
 
@@ -40,11 +49,8 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            className="w-full bg-blue-600 hover:bg-blue-700"
-            onClick={handleLogin}
-          >
-            Login
+          <Button className="w-full" onClick={handleLogin}>
+            {loading ? "Loading..." : "Sign in"}
           </Button>
         </CardContent>
       </Card>
