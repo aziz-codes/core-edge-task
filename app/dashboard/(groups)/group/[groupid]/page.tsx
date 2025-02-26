@@ -8,7 +8,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
 import { supabase } from "@/lib/supabase";
-import { Description } from "@radix-ui/react-dialog";
 
 export default function GroupDetail() {
   const params = useParams();
@@ -82,29 +81,57 @@ export default function GroupDetail() {
   };
 
   return (
-    <div className="md:w-2/3 overflow-y-auto max-h-[500px]">
+    <div className="w-full overflow-y-auto">
       {groupName === null ? (
         <h1 className="text-2xl font-bold text-center text-red-600">
           No group found with this ID
         </h1>
       ) : (
-        <>
-          <h1 className="text-2xl font-bold text-center mb-6">
-            - {groupName} Expenses
-          </h1>
-          <label className="font-semibold">
-            Total Expense{" "}
-            <span className="text-green-500">
-              {expenses.length > 0 &&
-                expenses.reduce((sum, expense) => (sum += expense.amount), 0)}
-              $
-            </span>
-          </label>
-          <div className="space-y-4">
+        <div className="flex justify-center gap-4  mt-3 mx-auto">
+          <div className="md:w-1/3 p-4 rounded-lg shadow-md h-auto max-h-64">
+            <h2 className="text-lg font-semibold mb-4">Add New Expense</h2>
+            <div className="space-y-3">
+              <Input
+                placeholder="Description"
+                value={newExpense.description}
+                onChange={(e) =>
+                  setNewExpense({ ...newExpense, description: e.target.value })
+                }
+              />
+              <Input
+                placeholder="Amount"
+                type="number"
+                value={newExpense.amount}
+                onChange={(e) =>
+                  setNewExpense({ ...newExpense, amount: e.target.value })
+                }
+              />
+              <Button
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                onClick={handleAddExpense}
+              >
+                Add Expense
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-4 flex flex-col">
+            <h1 className="text-2xl font-bold text-center mb-6">
+              - {groupName} Expenses
+            </h1>
+            <label className="font-semibold">
+              Total Expense{" "}
+              <span className="text-green-500">
+                {expenses.length > 0 &&
+                  expenses.reduce((sum, expense) => (sum += expense.amount), 0)}
+                $
+              </span>
+            </label>
+
             {expenses.map((expense) => (
               <Card
                 key={expense.id}
-                className="shadow-md border-l-4 border-blue-500"
+                className="shadow-md border-l-4 border-blue-500 w-full"
               >
                 <CardContent className="p-4 flex justify-between items-center">
                   <div>
@@ -120,7 +147,7 @@ export default function GroupDetail() {
               </Card>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
